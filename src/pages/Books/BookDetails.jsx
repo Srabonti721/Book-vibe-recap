@@ -1,9 +1,12 @@
 import React from 'react';
-import { HiH2 } from 'react-icons/hi2';
+// import { HiH2 } from 'react-icons/hi2';
 import { useLoaderData, useParams } from 'react-router';
 import { addToStoredDB } from '../../utility/AddToDB';
 import { AddToStoredWishDB } from '../../utility/AddToWishDB';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
+const MySwal = withReactContent(Swal)
 
 
 const BookDetails = () => {
@@ -16,14 +19,21 @@ const BookDetails = () => {
 
 
     const handleRead = (id) =>{
-        addToStoredDB(id)    
+        addToStoredDB(id)  ; 
+        MySwal.fire({
+              icon: "error",
+  title: "Oops...",
+  text: "Something went wrong!",
+  footer: "<a href=\"#\">Why do I have this issue?</a>"
+})
     }
 
     const handleWishList = (id) =>{
-        console.log("click");
+        // console.log("click");
         AddToStoredWishDB(id)
     }
     return (
+        
         <div className='flex gap-4 '>
             <div className=' bg-gray-100 p-10'>
                 <img className=' max-h-96 max-w-xl rounded-lg ' src={image} alt="book" />
@@ -52,7 +62,8 @@ const BookDetails = () => {
                         <h2>: {rating}</h2>
                     </div>
                 </div>
-                <button onClick={()=>(handleRead(id))} className="btn m-2">read</button>
+                <button onClick={()=>(handleRead(id))} className="btn m-2">read 
+                </button>
                 <button onClick={()=>handleWishList(id)} className="btn bg-blue-300 text-white">wishList</button>
             </div>
         </div>
