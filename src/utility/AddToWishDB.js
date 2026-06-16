@@ -19,4 +19,4 @@ else{
     localStorage.setItem('wishList', data);
 }
 }
-export {AddToStoredWishDB}
+export {AddToStoredWishDB, getStoredWishBook}
