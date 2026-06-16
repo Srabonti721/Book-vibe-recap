@@ -1,6 +1,8 @@
 import React from 'react';
 import { HiH2 } from 'react-icons/hi2';
 import { useLoaderData, useParams } from 'react-router';
+import { addToStoredDB } from '../../utility/AddToDB';
+import { AddToStoredWishDB } from '../../utility/AddToWishDB';
 
 
 
@@ -9,8 +11,18 @@ const BookDetails = () => {
     const bookId = parseInt(id)
     const data = useLoaderData();
     const singleData = data.find(book => book.bookId === bookId);
-    console.log(bookId, data);
-    const { bookName,totalPages, author, review, publisher, tags, rating, image, category, yearOfPublishing } = singleData
+    // console.log(bookId, data);
+    const { bookName,totalPages, author, review, publisher, tags, rating, image, category, yearOfPublishing } = singleData;
+
+
+    const handleRead = (id) =>{
+        addToStoredDB(id)    
+    }
+
+    const handleWishList = (id) =>{
+        console.log("click");
+        AddToStoredWishDB(id)
+    }
     return (
         <div className='flex gap-4 '>
             <div className=' bg-gray-100 p-10'>
@@ -40,8 +52,8 @@ const BookDetails = () => {
                         <h2>: {rating}</h2>
                     </div>
                 </div>
-                <button className="btn m-2">read</button>
-                <button className="btn bg-blue-300 text-white">wishList</button>
+                <button onClick={()=>(handleRead(id))} className="btn m-2">read</button>
+                <button onClick={()=>handleWishList(id)} className="btn bg-blue-300 text-white">wishList</button>
             </div>
         </div>
     );
