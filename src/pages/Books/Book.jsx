@@ -1,7 +1,8 @@
 import React from 'react';
+import { FaStarHalfAlt } from "react-icons/fa";
 
 const Book = ({book}) => {
-    const {bookName, publisher, tags, rating, image} = book;
+    const {bookName, publisher, tags, rating, image, category, yearOfPublishing} = book;
     console.log(book);
     
     return (
@@ -12,15 +13,20 @@ const Book = ({book}) => {
       src={image}
       alt="Shoes" />
   </figure>
+  <div className='flex gap-6 mx-6 text-green-400'>
+    {
+        tags.map((tag, index)=><h2 key={index}>{tag}</h2>)
+    } 
+  </div>
   <div className="card-body">
     <h2 className="card-title">
-      Card Title
-      <div className="badge badge-secondary">NEW</div>
+      {bookName}
+      <div className="badge badge-secondary">{yearOfPublishing}</div>
     </h2>
-    <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
-    <div className="card-actions justify-end">
-      <div className="badge badge-outline">Fashion</div>
-      <div className="badge badge-outline">Products</div>
+    <p>By : {publisher}</p>
+    <div className="card-actions justify-between ">
+      <div className="badge">{category}</div>
+      <div className="badge ">{rating} <FaStarHalfAlt /></div>
     </div>
   </div>
 </div>
